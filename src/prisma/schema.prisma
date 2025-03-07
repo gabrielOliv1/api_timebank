@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @id @default(uuid())
+  firebaseId String   @unique
+  name       String
+  email      String   @unique
+  balance    Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Post {
+  id          String         @id @default(uuid())
+  title       String
+  description String
+  imagesUrl   String[]
+  price       Int
+  categories  PostCategory[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model ServiceCategory {
+  id          String         @id @default(uuid())
+  name        String         @unique
+  description String?
+  posts       PostCategory[]
+}
+
+model PostCategory {
+  postId            String
+  serviceCategoryId String
+
+  post            Post            @relation(fields: [postId], references: [id])
+  serviceCategory ServiceCategory @relation(fields: [serviceCategoryId], references: [id])
+
+  @@id([postId, serviceCategoryId])
+}
