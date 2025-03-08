@@ -9,6 +9,9 @@
     "prepare": "husky install",
     "commit": "cz"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gabrielOliv1/api_timebank.git"
