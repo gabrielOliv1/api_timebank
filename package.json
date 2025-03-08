@@ -10,7 +10,7 @@
     "commit": "cz"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node src/prisma/seed.ts"
   },
   "repository": {
     "type": "git",
