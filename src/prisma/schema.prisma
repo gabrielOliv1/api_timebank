@@ -23,9 +23,9 @@ model Post {
   description String
   imagesUrl   String[]
   price       Int
-  categories  PostCategory[]
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
+  categories  PostCategory[]
 }
 
 model ServiceCategory {
@@ -38,9 +38,8 @@ model ServiceCategory {
 model PostCategory {
   postId            String
   serviceCategoryId String
-
-  post            Post            @relation(fields: [postId], references: [id])
-  serviceCategory ServiceCategory @relation(fields: [serviceCategoryId], references: [id])
+  post              Post            @relation(fields: [postId], references: [id])
+  serviceCategory   ServiceCategory @relation(fields: [serviceCategoryId], references: [id])
 
   @@id([postId, serviceCategoryId])
 }
