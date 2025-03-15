@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { AuthInput } from "../types/auth";
 
 export class UserRepository {
     
@@ -9,4 +10,6 @@ export class UserRepository {
             where: { email },
          });
     }
+
+    // public async create({ name, email, balance }: AuthInput ) {}
 }
