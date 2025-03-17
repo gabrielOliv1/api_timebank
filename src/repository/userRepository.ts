@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { AuthInput } from "../types/auth";
+import { User } from "../types/user";
 
 export class UserRepository {
     
@@ -11,5 +11,14 @@ export class UserRepository {
          });
     }
 
-    // public async create({ name, email, balance }: AuthInput ) {}
+    public async create({ name, email, firebaseId, balance }: User) {
+        return await this.prisma.user.create({
+            data: {
+                name,
+                email,
+                firebaseId,
+                balance
+            }
+        });
+    }
 }

@@ -5,6 +5,9 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { useExpressServer } from 'routing-controllers'
+import { AuthController } from './controller/authController';
+import "reflect-metadata"
 
 dotenv.config();
 
@@ -13,6 +16,10 @@ const app: Application = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+useExpressServer(app, {
+    controllers: [AuthController]
+})
 
 app.get('/', (req: Request, res: Response) => {
     res.json({ message: 'Welcome to TimeBank API' });
