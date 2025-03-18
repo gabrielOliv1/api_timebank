@@ -2,6 +2,7 @@ services:
   postgres:
     image: postgres
     container_name: db_timebank
+    restart: always
     ports:
       - 6500:5432
     environment:
@@ -9,11 +10,14 @@ services:
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=db_timebank
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data]
+    networks:
+      - timebank_network
 
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin_timebank
+    restart: always
     ports:
       - 5050:80
     environment:
@@ -21,7 +25,13 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=root
     volumes:
       - pgadmin_data:/pgadmin
+    networks:
+      - timebank_network
 
 volumes:
   postgres_data:
   pgadmin_data:
+
+networks:
+  timebank_network:
+    driver: bridge

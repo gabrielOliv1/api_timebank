@@ -8,6 +8,7 @@ import dotenv from 'dotenv';
 import { useExpressServer } from 'routing-controllers'
 import { AuthController } from './controller/authController';
 import "reflect-metadata"
+import { syncUsers } from './prisma/prismaClient';
 
 dotenv.config();
 
@@ -33,5 +34,8 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on: http://localhost:${PORT}`);
 });
+
+console.log("DATABASE_URL_LOCAL", process.env.DATABASE_URL)
+syncUsers().then(() => console.log("users succesfully synchronized"))
 
 export default app;
