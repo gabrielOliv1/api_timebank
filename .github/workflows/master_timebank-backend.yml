@@ -67,7 +67,7 @@ jobs:
         run: unzip release.zip
 
       - name: Disable Azure Build During Deployment
-        run: az webapp config appsettings set --name timebank-backend --resource-group MeuResourceGroup --settings SCM_DO_BUILD_DURING_DEPLOYMENT=false
+        run: az webapp config appsettings set --name timebank-backend --resource-group timebank_backend_rg --settings SCM_DO_BUILD_DURING_DEPLOYMENT=false
         
       - name: Login to Azure
         uses: azure/login@v2
