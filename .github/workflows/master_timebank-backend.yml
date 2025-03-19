@@ -75,6 +75,9 @@ jobs:
           
       - name: Disable Azure Build During Deployment
         run: az webapp config appsettings set --name timebank-backend --resource-group timebank_backend_rg --settings SCM_DO_BUILD_DURING_DEPLOYMENT=false
+
+      - name: Wait before deployment
+        run: sleep 30
         
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
