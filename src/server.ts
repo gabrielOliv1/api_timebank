@@ -39,7 +39,6 @@ app.listen(PORT, () => {
     console.log(`Server is running on: http://localhost:${PORT}`);
 });
 
-console.log("DATABASE_URL_LOCAL", process.env.DATABASE_URL)
 syncUsers().then(() => console.log("users succesfully synchronized"))
 
 export default app;
