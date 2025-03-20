@@ -1,4 +1,3 @@
-import { query } from "express";
 import { SwaggerOptions } from "swagger-ui-express";
 
 const swaggerDefinition: SwaggerOptions = {

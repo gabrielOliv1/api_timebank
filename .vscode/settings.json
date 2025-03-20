@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/6728c2f0-69fb-4a02-b50b-17921c8afc66/resourceGroups/timebank_backend_rg/providers/Microsoft.Web/sites/timebank-backend",
+    "appService.deploySubpath": "."
+}
