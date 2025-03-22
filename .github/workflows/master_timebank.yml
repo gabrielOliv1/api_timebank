@@ -72,9 +72,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_925DC8776B254B6791CF8FEBAD14A6C3 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_4DBD6A86BF474B78AFFBB90DE6D2C2FC }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_7C45A00C22B6443080A11B8F67618C74 }}
+          client-id: ${{ secrets.AZURE_CLIENTID }}
+          tenant-id: ${{ secrets.AZURE_TENANTID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTIONID }}
 
       - name: Disable Azure build during deployment
         run: az webapp config appsettings set --name timebank --resource-group timebank_db_rg01 --settings SCM_DO_BUILD_DURING_DEPLOYMENT=false
