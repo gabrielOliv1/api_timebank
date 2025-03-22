@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 });
 const swaggerDocs = (0, swagger_jsdoc_1.default)(swagger_1.default);
 app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocs));
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on: http://localhost:${PORT}`);
 });
