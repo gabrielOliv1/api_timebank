@@ -1,6 +1,6 @@
-import { SwaggerOptions } from "swagger-ui-express";
-
-const swaggerDefinition: SwaggerOptions = {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const swaggerDefinition = {
     definition: {
         openapi: '3.0.0',
         info: {
@@ -34,20 +34,20 @@ const swaggerDefinition: SwaggerOptions = {
                         content: {
                             'application/json': {
                                 schema: {
-                                    type: 'object', 
+                                    type: 'object',
                                     properties: {
-                                        username: { 
+                                        username: {
                                             type: 'string',
                                             example: 'Gabs'
-                                            },
-                                        email: { 
-                                            type: 'string', 
+                                        },
+                                        email: {
+                                            type: 'string',
                                             example: 'gabs@gmail.com'
                                         },
-                                        password: { 
+                                        password: {
                                             type: 'string',
                                             example: '12345678'
-                                         },
+                                        },
                                     },
                                 },
                             },
@@ -322,17 +322,15 @@ const swaggerDefinition: SwaggerOptions = {
                                     }
                                 }
                             }
-                        }   
+                        }
                     }
                 }
             }
         }
-    },   
+    },
 };
-
-const swaggerOptions: SwaggerOptions = {
+const swaggerOptions = {
     definition: swaggerDefinition.definition,
     apis: ['./routes/*.ts'],
 };
-
-export default swaggerOptions;
+exports.default = swaggerOptions;

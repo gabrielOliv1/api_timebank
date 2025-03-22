@@ -4,10 +4,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"No tests specified yet\" && exit 0",
-    "start": "ts-node src/server.ts",
+    "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "prepare": "husky install",
-    "commit": "cz"
+    "commit": "cz",
+    "build": "tsc"
   },
   "prisma": {
     "seed": "ts-node src/prisma/seed.ts",
