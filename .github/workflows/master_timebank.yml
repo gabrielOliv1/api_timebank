@@ -77,7 +77,7 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTIONID }}
 
       - name: Disable Azure build during deployment
-        run: az webapp config appsettings set --name timebank --resource-group timebank_db_rg01 --settings SCM_DO_BUILD_DURING_DEPLOYMENT=false
+        run: az webapp config appsettings set --name timebank --resource-group timebank_backend_rg --settings SCM_DO_BUILD_DURING_DEPLOYMENT=false
       
       - name: Wait before deployment
         run: sleep 30
