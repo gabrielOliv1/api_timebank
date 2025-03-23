@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
+import admin from '../firebase';
 
-const databaseUrl = process.env.PROD === 'true' ? process.env.DATABASE_URL_AZURE : process.env.DATABASE_URL_LOCAL;
+const databaseUrl = (process.env.PROD === 'true' ? process.env.DATABASE_URL_AZURE : process.env.DATABASE_URL) || "";
 
 const prisma = new PrismaClient({
     datasources: {
@@ -10,3 +11,23 @@ const prisma = new PrismaClient({
     },
 });
 
+export async function syncUsers() {
+    const users = await admin.auth().listUsers()
+    
+    for (const user of users.users) {
+        const existingUser = await prisma.user.findUnique({
+            where: { email: user.email }
+        })
+
+        if (!existingUser) {
+            await prisma.user.create({
+                data: {
+                    firebaseId: user.uid,
+                    email: user.email || "",
+                    name: user.displayName || "User",
+                    balance: 0
+                }
+            })
+        }
+    }
+}

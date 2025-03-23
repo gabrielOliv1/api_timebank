@@ -65,10 +65,6 @@ const swaggerDefinition: SwaggerOptions = {
                                                 type: 'string',
                                                 example: 'User registered successfully'
                                             },
-                                            id: {
-                                                type: 'string',
-                                                example: '123e4567-e89b-12d3-a456-426614174000'
-                                            },
                                             token: {
                                                 type: 'string',
                                                 example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEyM2U0NTY3LWU4OWItMTJkMy1hNDU2LTQyNjYxNDE3NDAwMCIsImlhdCI6MTY3MzE5MzYwMCwiZXhwIjoxNjczMTk3MjAwfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
