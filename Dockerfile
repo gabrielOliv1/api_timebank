@@ -12,8 +12,16 @@ COPY . .
 RUN npm install
 RUN npm run build
 
+RUN apk add update && apk add install -y openssh-server
+RUN mkdir /var/run/sshd
+
+EXPOSE 2222 
 EXPOSE 8080
 
-CMD ["node", "dist/server.js"]
+COPY entrypoint.sh ./entrypoint.sh
+RUN chmod +x ./entrypoint.sh
+
+ENTRYPOINT [ "./entrypoint.sh" ]
+
 
 
