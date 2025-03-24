@@ -12,7 +12,7 @@ COPY . .
 RUN npm install
 RUN npm run build
 
-RUN apk add update && apk add install -y openssh-server
+RUN apk update && apk add --no-cache openssh
 RUN mkdir /var/run/sshd
 
 EXPOSE 2222 
