@@ -7,6 +7,7 @@ COPY tsconfig.json ./
 COPY src ./src
 COPY src/prisma ./src/prisma
 COPY .env ./
+COPY dist ./dist
 COPY . .
 
 RUN npm install
@@ -15,6 +16,3 @@ RUN npm run build
 EXPOSE 8080
 
 CMD [ "node dist/server.js" ]
-
-
-
