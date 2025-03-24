@@ -1,4 +1,4 @@
 #!/bin/sh
-/usr/sbin/sshd &
+/usr/sbin/sshd
 
-node dist/server.js
+exec node dist/server.js
