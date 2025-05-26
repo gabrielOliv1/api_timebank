@@ -1,4 +1,4 @@
-import { PrismaClient, User } from "@prisma/client";
+import prisma from '../prisma/prismaClient';
 import { UserRepository } from "../repository/userRepository";
 import { AuthInput } from "../types/auth";
 import admin from "../firebase";
@@ -7,23 +7,27 @@ export class UserService {
     private userRepository: UserRepository
 
     constructor() {
-        const prisma = new PrismaClient()
         this.userRepository = new UserRepository(prisma)
     }
 
     public async signupWithEmailPassword({ name, email, password }: AuthInput): Promise<{ token: string }> {
-        const firebaseUser = await admin.auth().createUser({
-            displayName: name,
-            email,
-            password
-        })
-
-        const firebaseId = firebaseUser.uid
-
-        await this.createUserInOurDatabase({ name, email, firebaseId })
-        const token = await this.createCustomToken(firebaseId)
-
-        return { token }
+        try {
+            const firebaseUser = await admin.auth().createUser({
+                displayName: name,
+                email,
+                password
+            })
+    
+            const firebaseId = firebaseUser.uid
+    
+            await this.createUserInOurDatabase({ name, email, firebaseId })
+            const token = await this.createCustomToken(firebaseId)
+    
+            return { token }
+        } catch (error) {
+            console.error('Firebase createUser error:', error)
+            throw error
+        }
     }
 
     public async createUserInOurDatabase({ name, email, firebaseId }: any) {

@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import admin from '../firebase';
 
-const databaseUrl = (process.env.PROD === 'true' ? process.env.DATABASE_URL_AZURE : process.env.DATABASE_URL) || "";
+const databaseUrl = process.env.DATABASE_URL;
 
 const prisma = new PrismaClient({
     datasources: {
@@ -9,6 +9,7 @@ const prisma = new PrismaClient({
             url: databaseUrl,
         },
     },
+    log: ['query', 'info', 'warn', 'error']
 });
 
 export async function syncUsers() {
@@ -31,3 +32,5 @@ export async function syncUsers() {
         }
     }
 }
+
+export default prisma

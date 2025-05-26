@@ -17,16 +17,45 @@ export class AuthController {
         email: string,
         password: string
     }, @Res() res: Response) {
-       try {
-        const signupUser = await this.userService.signupWithEmailPassword(body)
+        if (!body.name || !body.email || !body.password) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
+        
+        if (!body.email.includes('@')) {
+            return res.status(400).json({ message: 'Invalid email format' });
+        }
 
-        return res.status(201).json({
-            message: 'User registred successfully',
-            token: signupUser.token
-        })
-       } catch (error) {
-        return res.status(401).json({ message: "Invalid token" })
-       }
+        try {
+            const signupUser = await this.userService.signupWithEmailPassword(body)
+
+            return res.status(201).json({
+                message: 'User registred successfully',
+                token: signupUser.token
+            })
+        } catch (error) {
+            console.log(error)
+
+            if (error instanceof Error && 'code' in error) {
+                const firebaseError = error as { code: string; message: string };
+
+                if (firebaseError.code === 'auth/email-already-exists') {
+                    return res.status(400).json({
+                        message: 'Email already in use'
+                    })
+                }
+
+                if (firebaseError.code === 'auth/invalid-password') {
+                    return res.status(400).json({
+                        message: 'Password does not meet requirements'
+                    })
+                }
+            }
+
+            return res.status(500).json({
+                message: 'Signup failed',
+                error: error instanceof Error ? error.message : 'Unknown error'
+            })
+        }
     }
-    
+
 }
